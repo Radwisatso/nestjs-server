@@ -7,6 +7,7 @@ import { PassportModule } from '@nestjs/passport'
 import { JwtModule } from '@nestjs/jwt'
 import { JwtStrategy } from './jwt.strategy';
 import { ConfigModule } from '@nestjs/config';
+import { SupabaseStrategy } from './supabase.strategy';
 
 @Module({
   imports: [
@@ -19,8 +20,8 @@ import { ConfigModule } from '@nestjs/config';
       secret: process.env.JWT_KEY,
     })
   ],
-  providers: [AuthService, JwtStrategy],
+  providers: [AuthService, JwtStrategy, SupabaseStrategy],
   controllers: [AuthController],
-  exports: [JwtStrategy, PassportModule] // Enable authentication on the other module
+  exports: [JwtStrategy, PassportModule, SupabaseStrategy] // Enable authentication on the other module
 })
 export class AuthModule { }
